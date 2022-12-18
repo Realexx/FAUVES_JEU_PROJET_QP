@@ -3,4 +3,4 @@ project(FAUVES_JEU_PROJET_QP)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(FAUVES_JEU_PROJET_QP main.cpp)
+add_executable(FAUVES_JEU_PROJET_QP main.cpp src/fauve.cpp src/fauve.h src/lion.cpp src/lion.h src/tigre.cpp src/tigre.h src/position.cpp src/position.h)
