@@ -25,11 +25,12 @@ struct Terrain {
 
 // Affiche le terrain de jeu en mode texte
 void afficher_terrain(const Terrain& terrain) {
+    std::cout << '\n';
     for (int y = 0; y < terrain.hauteur; y++) {
         for (int x = 0; x < terrain.largeur; x++) {
             // Affiche le joueur
             if (x == terrain.joueur_x && y == terrain.joueur_y) {
-                std::cout << 'J';
+                std::cout << " J ";
                 continue;
             }
 
@@ -37,7 +38,7 @@ void afficher_terrain(const Terrain& terrain) {
             bool fauve_trouve = false;
             for (const Fauve& fauve : terrain.fauves) {
                 if (fauve.x == x && fauve.y == y && fauve.est_vivant) {
-                    std::cout << (fauve.est_lion ? 'L' : 'T');
+                    std::cout << (fauve.est_lion ? " L " : " T ");
                     fauve_trouve = true;
                     break;
                 }
@@ -48,7 +49,7 @@ void afficher_terrain(const Terrain& terrain) {
             bool piege_trouve = false;
             for (const Piege& piege : terrain.pieges) {
                 if (piege.x == x && piege.y == y) {
-                    std::cout << 'P';
+                    std::cout << " P ";
                     piege_trouve = true;
                     break;
                 }
@@ -56,46 +57,110 @@ void afficher_terrain(const Terrain& terrain) {
             if (piege_trouve) continue;
 
             // Affiche une case vide
-            std::cout << '.';
+            std::cout << " . ";
         }
         std::cout << std::endl;
     }
+    std::cout << '\n';
 }
 
-// Demande au joueur de déplacer le personnage et met à jour sa position
-void joueur_se_deplace(Terrain& terrain) {
-    std::cout << "Où souhaitez-vous déplacer le joueur ? (haut/bas/gauche/droite/haut-gauche/haut-droite/bas-gauche/bas-droite)" << std::endl;
-    std::string direction;
-    std::cin >> direction;
+// Fonction qui check si le déplacement d'un joueur est valide vis à vis des bordures du terrain
+bool est_deplacement_dans_bordures(const Terrain& terrain) {
+    return (!(terrain.joueur_x > terrain.largeur-1 || terrain.joueur_x < 0 || terrain.joueur_y < 0 || terrain.joueur_y > terrain.hauteur-1));
+}
 
-    if (direction == "haut") {
-        terrain.joueur_y--;
-    } else if (direction == "bas") {
-        terrain.joueur_y++;
-    } else if (direction == "gauche") {
-        terrain.joueur_x--;
-    } else if (direction == "droite") {
-        terrain.joueur_x++;
-    } else if (direction == "haut-gauche") {
-        terrain.joueur_x--;
-        terrain.joueur_y--;
-    } else if (direction == "haut-droite") {
-        terrain.joueur_x++;
-        terrain.joueur_y--;
-    } else if (direction == "bas-gauche") {
-        terrain.joueur_x--;
-        terrain.joueur_y++;
-    } else if (direction == "bas-droite") {
-        terrain.joueur_x++;
-        terrain.joueur_y++;
-    } else {
-        std::cout << "Direction invalide, veuillez réessayer." << std::endl;
+// Demande au joueur de déplacer le personnage et met à jour sa position, retourne si le joueur s'est bien déplacé ou non.
+bool joueur_se_deplace(Terrain &terrain) {
+    std::cout << "Où souhaitez-vous déplacer le joueur ?" << '\n';
+    std::cout << "(1) Haut" << '\n';
+    std::cout << "(2) Bas" << '\n';
+    std::cout << "(3) Droite" << '\n';
+    std::cout << "(4) Gauche" << '\n';
+    std::cout << "(5) Haut-Gauche" << '\n';
+    std::cout << "(6) Haut-Droite" << '\n';
+    std::cout << "(7) Bas-Gauche" << '\n';
+    std::cout << "(8) Bas-Droite" << '\n';
+
+    int direction;
+    std::cin >> direction;
+    bool deplacementValide = true;
+
+    switch (direction) {
+        case 1:
+            terrain.joueur_y--;
+            if (!est_deplacement_dans_bordures(terrain)) {
+                terrain.joueur_y++;
+                deplacementValide = false;
+            }
+            break;
+        case 2:
+            terrain.joueur_y++;
+            if (!est_deplacement_dans_bordures(terrain)) {
+                terrain.joueur_y--;
+                deplacementValide = false;
+            }
+            break;
+        case 3:
+            terrain.joueur_x++;
+            if (!est_deplacement_dans_bordures(terrain)) {
+                terrain.joueur_x--;
+                deplacementValide = false;
+            }
+            break;
+        case 4:
+            terrain.joueur_x--;
+            if (!est_deplacement_dans_bordures(terrain)) {
+                terrain.joueur_x++;
+                deplacementValide = false;
+            }
+            break;
+        case 5:
+            terrain.joueur_x--;
+            terrain.joueur_y--;
+            if (!est_deplacement_dans_bordures(terrain)) {
+                terrain.joueur_x++;
+                terrain.joueur_y++;
+                deplacementValide = false;
+            }
+            break;
+        case 6:
+            terrain.joueur_x++;
+            terrain.joueur_y--;
+            if (!est_deplacement_dans_bordures(terrain)) {
+                terrain.joueur_x--;
+                terrain.joueur_y++;
+                deplacementValide = false;
+            }
+            break;
+        case 7:
+            terrain.joueur_x--;
+            terrain.joueur_y++;
+            if (!est_deplacement_dans_bordures(terrain)) {
+                terrain.joueur_x++;
+                terrain.joueur_y--;
+                deplacementValide = false;
+            }
+            break;
+        case 8:
+            terrain.joueur_x++;
+            terrain.joueur_y++;
+            if (!est_deplacement_dans_bordures(terrain)) {
+                terrain.joueur_x--;
+                terrain.joueur_y--;
+                deplacementValide = false;
+            }
+            break;
+        default:
+            deplacementValide = false;
     }
+
+    if (!deplacementValide) std::cout << "Déplacement invalide veuillez ressayer !";
+    return deplacementValide;
 }
 
 // Fait bouger un fauve du terrain
 void fauve_se_deplace(Terrain& terrain, Fauve& fauve) {
-    // Si le fauve est un lion, il ne peut se déplacer que horizontalement ou verticalement
+    // Si le fauve est un lion, il ne peut se déplacer qu'horizontalement ou verticalement
     if (fauve.est_lion) {
         if (fauve.x < terrain.joueur_x) {
             fauve.x++;
@@ -106,7 +171,7 @@ void fauve_se_deplace(Terrain& terrain, Fauve& fauve) {
         } else if (fauve.y > terrain.joueur_y) {
             fauve.y--;
         }
-    } else { // Si le fauve est un tigre, il peut se déplacer aussi en diagonale
+    } else { // Si le fauve est un tigre, il peut se déplacer aussi en diagonale //TODO Implémenter les diagonales
         if (fauve.x < terrain.joueur_x) {
             fauve.x++;
         } else if (fauve.x > terrain.joueur_x) {
@@ -160,7 +225,7 @@ bool joueur_en_vie(const Terrain& terrain) {
     return true;
 }
 
-// Vérifie si il reste des fauves en vie sur le terrain
+// Vérifie s'il reste des fauves en vie sur le terrain
 bool fauves_en_vie(const Terrain& terrain) {
     for (const Fauve& fauve : terrain.fauves) {
         if (fauve.est_vivant) return true;
@@ -177,8 +242,8 @@ int main() {
     terrain.joueur_y = 0;
 
     // Ajout de fauves et de pièges au terrain
-    terrain.fauves.push_back({2, 2, true, true});
-    terrain.fauves.push_back({4, 4, false, true});
+    terrain.fauves.push_back({5, 2, true, true});
+
     terrain.pieges.push_back({5, 5});
     terrain.pieges.push_back({6, 6});
 
@@ -188,7 +253,7 @@ int main() {
         afficher_terrain(terrain);
 
         // Déplacement du joueur
-        joueur_se_deplace(terrain);
+        while (!joueur_se_deplace(terrain));
 
         // Déplacement des fauves
         faire_bouger_fauves(terrain);
@@ -200,6 +265,8 @@ int main() {
     } else {
         std::cout << "Vous avez perdu !" << std::endl;
     }
+
+    afficher_terrain(terrain);
 
     return 0;
 }
