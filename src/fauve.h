@@ -12,10 +12,15 @@ public:
     fauve();
     fauve(int ligne, int colonne);
     virtual ~fauve() = default;
-    virtual vector<position> positionsSuivantesPossibles() = 0;
+    virtual int getLigne() const = 0;
+    virtual int getColonne() const = 0;
+    virtual void setLigne(int ligne) = 0;
+    virtual void setColonne(int colonne) = 0;
+    virtual bool getEstVivant() const = 0;
+    virtual void setEstVivant(bool estVivant) = 0;
 
 private:
-    position d_pos;
+    position d_pos; bool d_est_vivant;
 };
 
 

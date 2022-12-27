@@ -1,13 +1,31 @@
 #include "lion.h"
 
-lion::lion() : d_pos{}
+lion::lion() : d_pos{}, d_est_vivant{true}
 {}
 
-lion::lion(position pos) : d_pos{pos.getLigne(), pos.getColonne()}
+lion::lion(position pos) : d_pos{pos.getLigne(), pos.getColonne()}, d_est_vivant{true}
 {}
 
-vector<position> lion::positionsSuivantesPossibles() {
-    // TODO générer la liste des positions suivantes possibles selon la position actuelle du lion
+int lion::getLigne() const {
+    return d_pos.getLigne();
+}
 
-    return vector<position>();
+int lion::getColonne() const {
+    return d_pos.getColonne();
+}
+
+void lion::setLigne(int ligne) {
+    d_pos.setLigne(ligne);
+}
+
+void lion::setColonne(int colonne) {
+    d_pos.setColonne(colonne);
+}
+
+bool lion::getEstVivant() const {
+    return d_est_vivant;
+}
+
+void lion::setEstVivant(bool estVivant) {
+    d_est_vivant = estVivant;
 }
