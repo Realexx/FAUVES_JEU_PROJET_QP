@@ -3,14 +3,14 @@
 
 
 #include "position.h"
+#include "terrain.h"
 #include <vector>
+#include <string>
 
 using namespace std;
 
 class fauve {
 public:
-    fauve();
-    fauve(int ligne, int colonne);
     virtual ~fauve() = default;
     virtual int getLigne() const = 0;
     virtual int getColonne() const = 0;
@@ -18,9 +18,8 @@ public:
     virtual void setColonne(int colonne) = 0;
     virtual bool getEstVivant() const = 0;
     virtual void setEstVivant(bool estVivant) = 0;
-
-private:
-    position d_pos; bool d_est_vivant;
+    virtual std::string getSymbole() = 0;
+    virtual void deplacement(terrain& t) = 0;
 };
 
 

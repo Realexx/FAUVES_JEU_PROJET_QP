@@ -208,6 +208,7 @@ void fauve_se_deplace(Terrain& terrain, Fauve& fauve) {
         }
     }
 }
+
 // Fait bouger tous les fauves du terrain
 void faire_bouger_fauves(Terrain& terrain) {
     for (Fauve& fauve : terrain.fauves) {
@@ -233,6 +234,7 @@ bool fauves_en_vie(const Terrain& terrain) {
     return false;
 }
 
+/*
 int main() {
     // Création du terrain
     Terrain terrain;
@@ -270,3 +272,4 @@ int main() {
 
     return 0;
 }
+ */
