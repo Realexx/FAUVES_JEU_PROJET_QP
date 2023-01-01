@@ -11,18 +11,18 @@ position::position(int ligne, int colonne) : d_ligne{ligne}, d_colonne{colonne}
 {}
 
 // Getter & setter
-int position::getLigne() const {
+int position::get_ligne() const {
     return d_ligne;
 }
 
-void position::setLigne(int dLigne) {
+void position::set_ligne(int dLigne) {
     d_ligne = dLigne;
 }
 
-int position::getColonne() const {
+int position::get_colonne() const {
     return d_colonne;
 }
 
-void position::setColonne(int dColonne) {
+void position::set_colonne(int dColonne) {
     d_colonne = dColonne;
 }

@@ -1,3 +1,5 @@
+#include <iostream>
+#include <ctime>
 #include "application.h"
 #include "terrain.h"
 #include "lion.h"
@@ -5,11 +7,11 @@
 #include "tigre.h"
 
 int main() {
-    /*
     application app{};
     app.run();
-     */
 
+
+    /*
     terrain t{10,10,position{0,0}};
     t.ajoute_piege(piege{5,5}); t.ajoute_piege(piege{6,6});
     t.ajoute_fauve(make_unique<lion>(position{5,2}));
@@ -17,5 +19,5 @@ int main() {
 
     partie p{t};
     p.run();
-
+    */
 };

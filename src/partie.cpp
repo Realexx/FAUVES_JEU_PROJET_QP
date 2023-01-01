@@ -10,48 +10,9 @@ partie::partie() : d_terrain{}
 partie::partie(terrain& t) : d_terrain{std::move(t)}
 {}
 
-void partie::afficher_terrain() {
-    std::cout << '\n';
-    for (int i = 0; i < d_terrain.getHauteur(); i++) {
-        for (int j = 0; j < d_terrain.getLargeur(); j++) {
-            // Affiche le joueur
-            if (j == d_terrain.getJoueurColonne() && i == d_terrain.getJoueurLigne()) {
-                std::cout << " J ";
-                continue;
-            }
-
-            // Affiche les fauves
-            bool fauve_trouve = false;
-            for (const auto& f : d_terrain.getFauves()) {
-                if (f->getColonne() == j && f->getLigne() == i && f->getEstVivant()) {
-                    std::cout << " " << f->getSymbole() << " ";
-                    fauve_trouve = true;
-                    break;
-                }
-            }
-            if (fauve_trouve) continue;
-
-            // Affiche les pièges
-            bool piege_trouve = false;
-            for (const piege& p : d_terrain.getPieges()) {
-                if (p.getColonne() == j && p.getLigne() == i) {
-                    std::cout << " P ";
-                    piege_trouve = true;
-                    break;
-                }
-            }
-            if (piege_trouve) continue;
-
-            // Affiche une case vide
-            std::cout << " . ";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << '\n';
-}
-
 bool partie::est_deplacement_dans_bordures() {
-    return (!(d_terrain.getJoueurColonne() > d_terrain.getLargeur()-1 || d_terrain.getJoueurColonne() < 0 || d_terrain.getJoueurLigne() < 0 || d_terrain.getJoueurLigne() > d_terrain.getHauteur()-1));
+    return (!(d_terrain.get_joueur_colonne() > d_terrain.get_largeur() - 1 || d_terrain.get_joueur_colonne() < 0 ||
+            d_terrain.get_joueur_ligne() < 0 || d_terrain.get_joueur_ligne() > d_terrain.get_hauteur() - 1));
 }
 
 bool partie::joueur_se_deplace() {
@@ -71,66 +32,66 @@ bool partie::joueur_se_deplace() {
 
     switch (direction) {
         case 1:
-            d_terrain.setJoueurLigne(d_terrain.getJoueurLigne()-1);
+            d_terrain.set_joueur_ligne(d_terrain.get_joueur_ligne() - 1);
             if (!est_deplacement_dans_bordures()) {
-                d_terrain.setJoueurLigne(d_terrain.getJoueurLigne()+1);
+                d_terrain.set_joueur_ligne(d_terrain.get_joueur_ligne() + 1);
                 deplacementValide = false;
             }
             break;
         case 2:
-            d_terrain.setJoueurLigne(d_terrain.getJoueurLigne()+1);
+            d_terrain.set_joueur_ligne(d_terrain.get_joueur_ligne() + 1);
             if (!est_deplacement_dans_bordures()) {
-                d_terrain.setJoueurLigne(d_terrain.getJoueurLigne()-1);
+                d_terrain.set_joueur_ligne(d_terrain.get_joueur_ligne() - 1);
                 deplacementValide = false;
             }
             break;
         case 3:
-            d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()+1);
+            d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() + 1);
             if (!est_deplacement_dans_bordures()) {
-                d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()-1);
+                d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() - 1);
                 deplacementValide = false;
             }
             break;
         case 4:
-            d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()-1);
+            d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() - 1);
             if (!est_deplacement_dans_bordures()) {
-                d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()+1);
+                d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() + 1);
                 deplacementValide = false;
             }
             break;
         case 5:
-            d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()-1);
-            d_terrain.setJoueurLigne(d_terrain.getJoueurColonne()-1);
+            d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() - 1);
+            d_terrain.set_joueur_ligne(d_terrain.get_joueur_colonne() - 1);
             if (!est_deplacement_dans_bordures()) {
-                d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()+1);
-                d_terrain.setJoueurLigne(d_terrain.getJoueurColonne()+1);
+                d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() + 1);
+                d_terrain.set_joueur_ligne(d_terrain.get_joueur_colonne() + 1);
                 deplacementValide = false;
             }
             break;
         case 6:
-            d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()+1);
-            d_terrain.setJoueurLigne(d_terrain.getJoueurColonne()-1);
+            d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() + 1);
+            d_terrain.set_joueur_ligne(d_terrain.get_joueur_colonne() - 1);
             if (!est_deplacement_dans_bordures()) {
-                d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()-1);
-                d_terrain.setJoueurLigne(d_terrain.getJoueurColonne()+1);
+                d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() - 1);
+                d_terrain.set_joueur_ligne(d_terrain.get_joueur_colonne() + 1);
                 deplacementValide = false;
             }
             break;
         case 7:
-            d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()-1);
-            d_terrain.setJoueurLigne(d_terrain.getJoueurColonne()+1);
+            d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() - 1);
+            d_terrain.set_joueur_ligne(d_terrain.get_joueur_colonne() + 1);
             if (!est_deplacement_dans_bordures()) {
-                d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()+1);
-                d_terrain.setJoueurLigne(d_terrain.getJoueurColonne()-1);
+                d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() + 1);
+                d_terrain.set_joueur_ligne(d_terrain.get_joueur_colonne() - 1);
                 deplacementValide = false;
             }
             break;
         case 8:
-            d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()+1);
-            d_terrain.setJoueurLigne(d_terrain.getJoueurColonne()+1);
+            d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() + 1);
+            d_terrain.set_joueur_ligne(d_terrain.get_joueur_colonne() + 1);
             if (!est_deplacement_dans_bordures()) {
-                d_terrain.setJoueurColonne(d_terrain.getJoueurColonne()-1);
-                d_terrain.setJoueurLigne(d_terrain.getJoueurColonne()-1);
+                d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() - 1);
+                d_terrain.set_joueur_ligne(d_terrain.get_joueur_colonne() - 1);
                 deplacementValide = false;
             }
             break;
@@ -143,14 +104,15 @@ bool partie::joueur_se_deplace() {
 }
 
 void partie::faire_bouger_fauves() {
-    for (const auto& fauve : d_terrain.getFauves()) {
+    for (const auto& fauve : d_terrain.get_fauves()) {
         fauve->deplacement(d_terrain);
     }
 }
 
 bool partie::joueur_en_vie() {
-    for (const auto & fauve : d_terrain.getFauves()) {
-        if (fauve->getColonne() == d_terrain.getJoueurColonne() && fauve->getLigne() == d_terrain.getJoueurLigne() && fauve->getEstVivant()) {
+    for (const auto & fauve : d_terrain.get_fauves()) {
+        if (fauve->get_colonne() == d_terrain.get_joueur_colonne() && fauve->get_ligne() == d_terrain.get_joueur_ligne() &&
+            fauve->get_est_vivant()) {
             return false;
         }
     }
@@ -158,8 +120,8 @@ bool partie::joueur_en_vie() {
 }
 
 bool partie::fauves_en_vie() {
-    for (const auto& fauve : d_terrain.getFauves()) {
-        if (fauve->getEstVivant()) return true;
+    for (const auto& fauve : d_terrain.get_fauves()) {
+        if (fauve->get_est_vivant()) return true;
     }
     return false;
 }
@@ -167,7 +129,7 @@ bool partie::fauves_en_vie() {
 void partie::run() {
     while (joueur_en_vie() && fauves_en_vie()) {
         // Affichage du terrain
-        afficher_terrain();
+        d_terrain.affiche();
 
         // Déplacement du joueur
         while (!joueur_se_deplace());
@@ -183,7 +145,7 @@ void partie::run() {
         std::cout << "Vous avez perdu !" << std::endl;
     }
 
-    afficher_terrain();
+    d_terrain.affiche();
 }
 
 

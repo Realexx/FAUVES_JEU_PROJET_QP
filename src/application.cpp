@@ -1,5 +1,15 @@
 #include "application.h"
+#include "partie.h"
+#include "tigre.h"
+#include "lion.h"
 #include <iostream>
+
+application::application() : d_terrain_charge{9,9,position{0,0}}
+{
+    d_terrain_charge.ajoute_piege({4,4});
+    d_terrain_charge.ajoute_fauve(std::make_unique<tigre>(position{8, 8}));
+    d_terrain_charge.ajoute_fauve(std::make_unique<lion>(position{8, 0}));
+}
 
 void application::run() {
     bool goOn = true;
@@ -33,8 +43,8 @@ int application::menu_principal() {
 }
 
 void application::jouer() {
-    std::cout << "Jouer";
-    //  Afficher la liste des terrains sauvegardés
+    partie p{d_terrain_charge};
+    p.run();
 }
 
 void application::creation_terrain() {

@@ -7,7 +7,6 @@ class partie {
 public:
     partie();
     partie(terrain& t);
-    void afficher_terrain();
     bool est_deplacement_dans_bordures();
     bool joueur_se_deplace();
     void faire_bouger_fauves();

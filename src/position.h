@@ -6,10 +6,10 @@ class position {
 public:
     position();
     position(int ligne, int colonne);
-    int getLigne() const;
-    void setLigne(int dLigne);
-    int getColonne() const;
-    void setColonne(int dColonne);
+    int get_ligne() const;
+    void set_ligne(int dLigne);
+    int get_colonne() const;
+    void set_colonne(int dColonne);
 
 private:
     int d_ligne, d_colonne;

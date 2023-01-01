@@ -6,20 +6,20 @@ piege::piege() : d_position{0,0}
 piege::piege(int ligne, int colonne) : d_position{ligne, colonne}
 {}
 
-int piege::getLigne() const {
-    return d_position.getLigne();
+int piege::get_ligne() const {
+    return d_position.get_ligne();
 }
 
-int piege::getColonne() const {
-    return d_position.getColonne();
+int piege::get_colonne() const {
+    return d_position.get_colonne();
 }
 
-void piege::setLigne(int ligne) {
-    d_position.setLigne(ligne);
+void piege::set_ligne(int ligne) {
+    d_position.set_ligne(ligne);
 }
 
-void piege::setColonne(int colonne) {
-    d_position.setColonne(colonne);
+void piege::set_colonne(int colonne) {
+    d_position.set_colonne(colonne);
 }
 
 

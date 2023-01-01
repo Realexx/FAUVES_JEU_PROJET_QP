@@ -10,16 +10,17 @@ class terrain {
 public:
     terrain();
     terrain(int largeur, int hauteur, position position_joueur);
-    int getLargeur() const;
-    int getHauteur() const;
-    int getJoueurLigne() const;
-    int getJoueurColonne() const;
-    void setJoueurLigne(int ligne);
-    void setJoueurColonne(int colonne);
-    std::vector<piege> getPieges() const;
-    const std::vector<std::unique_ptr<fauve>>& getFauves();
+    int get_largeur() const;
+    int get_hauteur() const;
+    int get_joueur_ligne() const;
+    int get_joueur_colonne() const;
+    void set_joueur_ligne(int ligne);
+    void set_joueur_colonne(int colonne);
+    std::vector<piege> get_pieges() const;
+    const std::vector<std::unique_ptr<fauve>>& get_fauves();
     void ajoute_piege(piege p);
     void ajoute_fauve(std::unique_ptr<fauve> f);
+    void affiche();
 
 private:
     int d_largeur, d_hauteur;

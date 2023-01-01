@@ -12,14 +12,23 @@ using namespace std;
 class fauve {
 public:
     virtual ~fauve() = default;
-    virtual int getLigne() const = 0;
-    virtual int getColonne() const = 0;
-    virtual void setLigne(int ligne) = 0;
-    virtual void setColonne(int colonne) = 0;
-    virtual bool getEstVivant() const = 0;
-    virtual void setEstVivant(bool estVivant) = 0;
-    virtual std::string getSymbole() = 0;
+    fauve();
+    fauve(position pos);
+    int get_ligne() const;
+    int get_colonne() const;
+    void set_ligne(int ligne);
+    void set_colonne(int colonne);
+    bool get_est_vivant() const;
+    void set_est_vivant(bool estVivant);
+    std::string get_symbole();
+    void set_symbole(std::string symbole);
     virtual void deplacement(terrain& t) = 0;
+    void verif_deplacement(terrain& t);
+
+protected:
+    position d_pos, d_pos_precedente;
+    bool d_est_vivant;
+    std::string d_symbole;
 };
 
 
