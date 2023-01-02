@@ -13,9 +13,10 @@ public:
     bool joueur_en_vie();
     bool fauves_en_vie();
     void run();
+    void reinitialisation();
 
 private:
-    terrain d_terrain;
+    terrain d_terrain, d_copy_terrain_initial;
 };
 
 

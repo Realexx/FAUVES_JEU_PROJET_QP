@@ -7,7 +7,7 @@
 partie::partie() : d_terrain{}
 {}
 
-partie::partie(terrain& t) : d_terrain{std::move(t)}
+partie::partie(terrain& t) : d_terrain{std::move(t)}, d_copy_terrain_initial{std::move(t)} // TODO debugger pour que 'd_copy_terrain_initial' contienne la même chose que 'd_terrain' (il faudrait probablement utiliser un constructeur par recopie ou une surcharge d'opérateur =)
 {}
 
 bool partie::est_deplacement_dans_bordures() {
@@ -146,6 +146,11 @@ void partie::run() {
     }
 
     d_terrain.affiche();
+}
+
+void partie::reinitialisation() {
+    // TODO réinitialiser une partie en copiant le terrain stocké dans 'd_copy_terrain_initial' dans la variable 'd_terrain'
+    // Il faut d'abord réussir à copier initialement 'd_terrain' dans 'd_copy_terrain_initial' ce qui ne marche pas pour le moment (voir ligne 10)
 }
 
 

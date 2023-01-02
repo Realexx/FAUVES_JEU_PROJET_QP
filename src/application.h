@@ -13,6 +13,7 @@ private:
     void jouer();
     void creation_terrain();
     void edition_terrain();
+    void choix_terrain();
 
     terrain d_terrain_charge;
 };
