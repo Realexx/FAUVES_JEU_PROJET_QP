@@ -2,6 +2,7 @@
 #define FAUVES_JEU_PROJET_QP_APPLICATION_H
 
 #include "terrain.h"
+#include "partie.h"
 
 class application {
 public:
@@ -16,6 +17,7 @@ private:
     void choix_terrain();
 
     terrain d_terrain_charge;
+    partie d_partie;
 };
 
 

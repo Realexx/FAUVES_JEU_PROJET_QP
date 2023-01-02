@@ -4,12 +4,8 @@
 #include "lion.h"
 #include <iostream>
 
-application::application() : d_terrain_charge{9,9,position{0,0}}
-{
-    d_terrain_charge.ajoute_piege({4,4});
-    d_terrain_charge.ajoute_fauve(std::make_unique<tigre>(position{8, 8}));
-    d_terrain_charge.ajoute_fauve(std::make_unique<lion>(position{8, 0}));
-}
+application::application() : d_terrain_charge{9,9,position{0,0}}, d_partie{d_terrain_charge}
+{}
 
 void application::run() {
     bool goOn = true;
@@ -45,9 +41,8 @@ int application::menu_principal() {
 }
 
 void application::jouer() {
-    partie p{d_terrain_charge};
-    p.run();
-    // p.reinitialisation();
+    d_partie.run();
+    // d_partie.reinitialisation();
 }
 
 void application::creation_terrain() {

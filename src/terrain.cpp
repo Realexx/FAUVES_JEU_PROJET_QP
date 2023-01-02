@@ -1,5 +1,7 @@
 #include "terrain.h"
 #include "fauve.h"
+#include "tigre.h"
+#include "lion.h"
 #include <utility>
 #include <iostream>
 
@@ -8,7 +10,12 @@ terrain::terrain() : d_largeur{10}, d_hauteur{10} , d_position_joueur{0, 0}, d_f
 
 terrain::terrain(int largeur, int hauteur, position position_joueur)
 : d_largeur{largeur}, d_hauteur{hauteur}, d_position_joueur{position_joueur}
-{}
+{
+    // Création d'un terrain de base
+    ajoute_piege({4,4});
+    ajoute_fauve(std::make_unique<tigre>(position{8, 8}));
+    ajoute_fauve(std::make_unique<lion>(position{8, 0}));
+}
 
 int terrain::get_largeur() const {
     return d_largeur;

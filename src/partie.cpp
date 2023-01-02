@@ -8,6 +8,7 @@ partie::partie() : d_terrain{}
 {}
 
 partie::partie(terrain& t) : d_terrain{std::move(t)}, d_copy_terrain_initial{std::move(t)} // TODO debugger pour que 'd_copy_terrain_initial' contienne la même chose que 'd_terrain' (il faudrait probablement utiliser un constructeur par recopie ou une surcharge d'opérateur =)
+// le move fait bugger imo
 {}
 
 bool partie::est_deplacement_dans_bordures() {
