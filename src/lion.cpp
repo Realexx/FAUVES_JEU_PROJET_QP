@@ -12,6 +12,10 @@ lion::lion(position pos) : fauve{pos}
     set_symbole("L");
 }
 
+string lion::get_type() {
+    return d_type;
+}
+
 void lion::deplacement(terrain &t) {
     // Enregistrement de la dernière position
     d_pos_precedente = d_pos;

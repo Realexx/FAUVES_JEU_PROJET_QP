@@ -8,6 +8,7 @@ fauve::fauve() : d_pos{}, d_est_vivant{true}
 fauve::fauve(position pos) : d_pos{pos.get_ligne(), pos.get_colonne()}, d_est_vivant{true}
 {}
 
+
 int fauve::get_ligne() const {
     return d_pos.get_ligne();
 }

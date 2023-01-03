@@ -8,7 +8,10 @@ class tigre : public fauve {
 public:
     tigre();
     tigre(position pos);
+
     void deplacement(terrain& t) override;
+private:
+    string d_type = "tigre";
 };
 
 

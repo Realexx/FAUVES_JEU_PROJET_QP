@@ -14,6 +14,7 @@ public:
     bool fauves_en_vie();
     void run();
     void reinitialisation();
+//    void set_terrain(terrain t);
 
 private:
     terrain d_terrain, d_copy_terrain_initial;

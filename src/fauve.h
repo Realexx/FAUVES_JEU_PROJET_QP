@@ -14,6 +14,7 @@ public:
     virtual ~fauve() = default;
     fauve();
     fauve(position pos);
+    string get_type();
     int get_ligne() const;
     int get_colonne() const;
     void set_ligne(int ligne);

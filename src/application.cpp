@@ -2,6 +2,7 @@
 #include "partie.h"
 #include "tigre.h"
 #include "lion.h"
+#include "terrain.h"
 #include <iostream>
 
 application::application() : d_terrain_charge{9,9,position{0,0}}, d_partie{d_terrain_charge}
@@ -29,7 +30,7 @@ int application::menu_principal() {
     {
         std::cout<<"MENU PRINCIPAL"<<'\n'<<'\n';
         std::cout<<"(1) Jouer"<<'\n';
-        std::cout<<"(2) Créer un terrain"<<'\n';
+        std::cout<<"(2) Creer un terrain"<<'\n';
         std::cout<<"(3) Editer un terrain"<<'\n';
         std::cout<<"(4) Choisir le terrain à charger"<<'\n';
         std::cout<<"(5) Quitter"<<std::endl;
@@ -46,7 +47,10 @@ void application::jouer() {
 }
 
 void application::creation_terrain() {
-    std::cout << "Menu création terrain\n";
+    terrain t1{1};
+    t1.creer_Terrain();
+    t1.sauvegarde();
+//    d_partie.set_terrain(t1);
     // TODO Affiche un questionnaire permettant de généré un fichier texte contenant les informations d'un terrain
 }
 

@@ -141,7 +141,7 @@ void partie::run() {
 
     // Fin de la partie
     if (joueur_en_vie()) {
-        std::cout << "Vous avez gagné !" << std::endl;
+        std::cout << "Vous avez gagne !" << std::endl;
     } else {
         std::cout << "Vous avez perdu !" << std::endl;
     }
@@ -153,6 +153,7 @@ void partie::reinitialisation() {
     // TODO réinitialiser une partie en copiant le terrain stocké dans 'd_copy_terrain_initial' dans la variable 'd_terrain'
     // Il faut d'abord réussir à copier initialement 'd_terrain' dans 'd_copy_terrain_initial' ce qui ne marche pas pour le moment (voir ligne 10)
 }
+
 
 
 

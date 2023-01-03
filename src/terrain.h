@@ -10,6 +10,9 @@ class terrain {
 public:
     terrain();
     terrain(int largeur, int hauteur, position position_joueur);
+
+    terrain(int larg);
+
     int get_largeur() const;
     int get_hauteur() const;
     int get_joueur_ligne() const;
@@ -21,6 +24,9 @@ public:
     void ajoute_piege(piege p);
     void ajoute_fauve(std::unique_ptr<fauve> f);
     void affiche();
+    void sauvegarde();
+
+    static void creer_Terrain();
 
 private:
     int d_largeur, d_hauteur;

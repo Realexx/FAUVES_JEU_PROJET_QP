@@ -8,6 +8,8 @@ class application {
 public:
     application();
     void run();
+    void set_partie(partie part);
+
 private:
     static int menu_principal();
 

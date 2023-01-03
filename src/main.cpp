@@ -7,6 +7,12 @@
 #include "tigre.h"
 
 int main() {
+
+//    terrain t{10, 10, {0, 0}};
+//    t.sauvegarde("C:\\Users\\rouam\\OneDrive\\Documents\\Cours\\ProjetL3\\FAUVES_JEU_PROJET_QP\\caca.txt");
+
+
+
     application app{};
     app.run();
 
