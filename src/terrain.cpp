@@ -11,8 +11,7 @@
 
 terrain::terrain() : d_largeur{10}, d_hauteur{10}, d_position_joueur{0, 0}, d_fauves{}, d_pieges{} {}
 
-terrain::terrain(int larg) : d_largeur{}, d_hauteur{}, d_position_joueur{ }, d_fauves{}, d_pieges{} {}
-
+terrain::terrain(int option) : d_largeur{}, d_hauteur{}, d_position_joueur{ }, d_fauves{}, d_pieges{} {}
 
 terrain::terrain(int largeur, int hauteur, position position_joueur)
         : d_largeur{largeur}, d_hauteur{hauteur}, d_position_joueur{position_joueur} {
@@ -25,7 +24,12 @@ terrain::terrain(int largeur, int hauteur, position position_joueur)
 int terrain::get_largeur() const {
     return d_largeur;
 }
-
+void terrain::set_largeur(int larg){
+    d_largeur= larg;
+}
+void terrain::set_hauteur(int haut){
+    d_hauteur= haut;
+}
 int terrain::get_hauteur() const {
     return d_hauteur;
 }
@@ -105,19 +109,18 @@ void terrain::affiche() {
 
 void terrain::sauvegarde() {
     // Ouvre un flux de sortie vers le fichier
-    std::string nom_fichier;
-    std::cout << "Comment voulez vous appeler le fichier ? ";
-    std::cin >> nom_fichier;
-    std::ofstream fichier(nom_fichier);
+    string nom_fichier;
+    cout << "Comment voulez vous appeler le fichier ? ";
+    cin >> nom_fichier;
+    ofstream fichier("C:\\Users\\rouam\\OneDrive\\Documents\\Cours\\ProjetL3\\FAUVES_JEU_PROJET_QP\\src\\"+nom_fichier);
 
-    // Écrit les informations sur le terrain dans le fichier
-    fichier << get_largeur() << ' ' << get_hauteur() << '\n';
-    fichier << d_position_joueur.get_ligne() << ' ' << d_position_joueur.get_colonne() << '\n';
+    // Écrit les informations sur le terrain dans le fichier à l'aide
+    cout<< get_largeur()<<"//"<< get_hauteur()<<"//" << d_position_joueur.get_ligne()<< endl;
+    fichier << get_largeur() << " "<< get_hauteur() << '\n';
     fichier << get_joueur_ligne() << ' ' << get_joueur_colonne() << '\n';
     fichier << d_fauves.size() << '\n';
     for (const auto &f: d_fauves) {
-        fichier << f->get_symbole() << ' ' << f->get_ligne() << ' ' << f->get_colonne() << ' ' << f->get_est_vivant()
-                << '\n';
+        fichier << f->get_symbole() << ' ' << f->get_ligne() << ' ' << f->get_colonne() << ' ' << '\n';
     }
     fichier << d_pieges.size() << '\n';
     for (const piege &p: d_pieges) {
@@ -131,12 +134,18 @@ void terrain::sauvegarde() {
 
 void terrain::creer_Terrain() {
     // Création du terrain
-    int largeur = fonctions::demande_entier("Entrez la largeur du terrain : ");
-    int hauteur =  fonctions::demande_entier("Entrez la hauteur du terrain : ");
-    int ligne =  fonctions::demande_entier("Entrez la ligne du joueur : ");
-    int colonne =  fonctions::demande_entier("Entrez la colonne du joueur : ");
-    position position_joueur{ligne, colonne};
-    terrain t{largeur, hauteur, position_joueur};
+    int largeurTerrain = fonctions::demande_entier("Entrez la largeur du terrain : ");
+    int hauteurTerrain =  fonctions::demande_entier("Entrez la hauteur du terrain : ");
+    int ligneJoueur =  fonctions::demande_entier("Entrez la ligne du joueur : ");
+    int colonneJoueur =  fonctions::demande_entier("Entrez la colonne du joueur : ");
+    position position_joueur{ligneJoueur, colonneJoueur};
+
+    set_joueur_ligne(ligneJoueur);
+    set_joueur_colonne(colonneJoueur);
+    set_hauteur(hauteurTerrain);
+    set_largeur(largeurTerrain);
+
+//    terrain t{largeurTerrain, hauteurTerrain, position_joueur};
 
     // Ajout de fauves sur le terrain
     char reponse =  fonctions::demande_oui_non("Voulez-vous ajouter des fauves sur le terrain ? (o/n) ");
@@ -148,9 +157,9 @@ void terrain::creer_Terrain() {
         position pos{ligne, colonne};
 
         if (type == "tigre") {
-            t.ajoute_fauve(std::make_unique<tigre>(pos));
+            ajoute_fauve(std::make_unique<tigre>(pos));
         } else if (type == "lion") {
-            t.ajoute_fauve(std::make_unique<lion>(pos));
+            ajoute_fauve(std::make_unique<lion>(pos));
         }
         reponse = fonctions::demande_oui_non("Voulez-vous ajouter un autre fauve ? (o/n) ");
     }
@@ -158,11 +167,10 @@ void terrain::creer_Terrain() {
     // Ajout de pièges sur le terrain
     reponse = fonctions::demande_oui_non("Voulez-vous ajouter des pieges sur le terrain ? (o/n) ");
     while (reponse == 'o') {
-        int ligne = fonctions::demande_entier("Entrez la ligne du piege : ");
-        int colonne = fonctions::demande_entier("Entrez la colonne du piege : ");
-        t.ajoute_piege({ligne, colonne});
+        int lignePiege = fonctions::demande_entier("Entrez la ligne du piege : ");
+        int colonnePiege = fonctions::demande_entier("Entrez la colonne du piege : ");
+        ajoute_piege({lignePiege, colonnePiege});
         reponse = fonctions::
                 demande_oui_non("Voulez-vous ajouter un autre piege ? (o/n) ");
     }
-
 }

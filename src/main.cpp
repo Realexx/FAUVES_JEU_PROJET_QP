@@ -5,13 +5,16 @@
 #include "lion.h"
 #include "partie.h"
 #include "tigre.h"
+#include "fonctions.h"
 
 int main() {
 
 //    terrain t{10, 10, {0, 0}};
 //    t.sauvegarde("C:\\Users\\rouam\\OneDrive\\Documents\\Cours\\ProjetL3\\FAUVES_JEU_PROJET_QP\\caca.txt");
 
-
+//    position p {5,5};
+//    terrain t {10,10,p};
+//    t.sauvegarde();
 
     application app{};
     app.run();

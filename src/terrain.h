@@ -15,6 +15,8 @@ public:
 
     int get_largeur() const;
     int get_hauteur() const;
+    void set_hauteur(int haut);
+    void set_largeur(int larg);
     int get_joueur_ligne() const;
     int get_joueur_colonne() const;
     void set_joueur_ligne(int ligne);
@@ -26,13 +28,14 @@ public:
     void affiche();
     void sauvegarde();
 
-    static void creer_Terrain();
+    void creer_Terrain();
 
 private:
     int d_largeur, d_hauteur;
     std::vector<std::unique_ptr<fauve>> d_fauves;
     std::vector<piege> d_pieges;
     position d_position_joueur;
+
 };
 
 

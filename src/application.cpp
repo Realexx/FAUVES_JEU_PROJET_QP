@@ -50,6 +50,9 @@ void application::creation_terrain() {
     terrain t1{1};
     t1.creer_Terrain();
     t1.sauvegarde();
+//    set_terrain_charge(t1);
+//    jouer();
+
 //    d_partie.set_terrain(t1);
     // TODO Affiche un questionnaire permettant de généré un fichier texte contenant les informations d'un terrain
 }
@@ -66,3 +69,7 @@ void application::choix_terrain() {
     // TODO Affiche la liste des fichiers/terrains + l'utilisateur sélectionne le fichier qu'il veut + conversion du fichier sélectionné en objet de type terrain
     // puis insertion du terrain obtenu dans 'd_terrain_charge'
 }
+
+//void application::set_terrain_charge(const terrain& t){
+//    d_terrain_charge = t;
+//}
