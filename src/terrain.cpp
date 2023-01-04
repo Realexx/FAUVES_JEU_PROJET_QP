@@ -21,6 +21,10 @@ terrain::terrain(int largeur, int hauteur, position position_joueur)
     ajoute_fauve(std::make_unique<lion>(position{8, 0}));
 }
 
+//terrain( terrain &t){
+//        : d_largeur{t.d_largeur}, d_hauteur{t.d_hauteur}, d_position_joueur{t.d_position_joueur},
+//          d_fauves{t.d_fauves}, d_pieges{t.d_pieges} {}
+//};
 int terrain::get_largeur() const {
     return d_largeur;
 }

@@ -70,6 +70,10 @@ void application::choix_terrain() {
     // puis insertion du terrain obtenu dans 'd_terrain_charge'
 }
 
-//void application::set_terrain_charge(const terrain& t){
-//    d_terrain_charge = t;
+//void application::set_terrain_charge(terrain& t){
+//    d_terrain_charge.get_largeur() = t.set_largeur(d_terrain_charge.get_largeur());
+//    d_terrain_charge.d_hauteur = t.d_hauteur;
+//    d_terrain_charge.d_position_joueur = t.d_position_joueur;
+//    d_terrain_charge.d_fauves = std::move(t.d_fauves);
+//    d_terrain_charge.d_pieges = t.d_pieges;
 //}

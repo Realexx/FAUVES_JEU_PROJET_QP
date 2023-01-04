@@ -9,7 +9,7 @@ public:
     application();
     void run();
     void set_partie(partie part);
-    void set_terrain_charge(const terrain& t);
+    void set_terrain_charge(terrain& t);
 
 private:
     static int menu_principal();
