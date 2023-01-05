@@ -9,6 +9,7 @@ public:
     partie(terrain& t);
     bool est_deplacement_dans_bordures();
     bool joueur_se_deplace();
+    bool joueur_se_deplaceExpert();
     void faire_bouger_fauves();
     bool joueur_en_vie();
     bool fauves_en_vie();
@@ -16,8 +17,11 @@ public:
     void reinitialisation();
 //    void set_terrain(terrain t);
 
+    void runExpert();
+
 private:
     terrain d_terrain, d_copy_terrain_initial;
+
 };
 
 

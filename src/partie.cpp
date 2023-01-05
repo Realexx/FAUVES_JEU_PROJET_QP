@@ -104,6 +104,53 @@ bool partie::joueur_se_deplace() {
     return deplacementValide;
 }
 
+bool partie::joueur_se_deplaceExpert() {
+    std::cout << "Où souhaitez-vous déplacer le joueur ?" << '\n';
+    std::cout << "(1) Haut" << '\n';
+    std::cout << "(2) Bas" << '\n';
+    std::cout << "(3) Droite" << '\n';
+    std::cout << "(4) Gauche" << '\n';
+
+    int direction;
+    std::cin >> direction;
+    bool deplacementValide = true;
+
+    switch (direction) {
+        case 1:
+            d_terrain.set_joueur_ligne(d_terrain.get_joueur_ligne() - 1);
+            if (!est_deplacement_dans_bordures()) {
+                d_terrain.set_joueur_ligne(d_terrain.get_joueur_ligne() + 1);
+                deplacementValide = false;
+            }
+            break;
+        case 2:
+            d_terrain.set_joueur_ligne(d_terrain.get_joueur_ligne() + 1);
+            if (!est_deplacement_dans_bordures()) {
+                d_terrain.set_joueur_ligne(d_terrain.get_joueur_ligne() - 1);
+                deplacementValide = false;
+            }
+            break;
+        case 3:
+            d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() + 1);
+            if (!est_deplacement_dans_bordures()) {
+                d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() - 1);
+                deplacementValide = false;
+            }
+            break;
+        case 4:
+            d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() - 1);
+            if (!est_deplacement_dans_bordures()) {
+                d_terrain.set_joueur_colonne(d_terrain.get_joueur_colonne() + 1);
+                deplacementValide = false;
+            }
+            break;
+        default:
+            deplacementValide = false;
+    }
+    if (!deplacementValide) std::cout << "Deplacement invalide veuillez ressayer !\n";
+    return deplacementValide;
+}
+
 void partie::faire_bouger_fauves() {
     for (const auto& fauve : d_terrain.get_fauves()) {
         fauve->deplacement(d_terrain);
@@ -134,6 +181,27 @@ void partie::run() {
 
         // Déplacement du joueur
         while (!joueur_se_deplace());
+
+        // Déplacement des fauves
+        faire_bouger_fauves();
+    }
+
+    // Fin de la partie
+    if (joueur_en_vie()) {
+        std::cout << "Vous avez gagne !" << std::endl;
+    } else {
+        std::cout << "Vous avez perdu !" << std::endl;
+    }
+
+    d_terrain.affiche();
+}
+void partie::runExpert() {
+    while (joueur_en_vie() && fauves_en_vie()) {
+        // Affichage du terrain
+        d_terrain.affiche();
+
+        // Déplacement du joueur
+        while (!joueur_se_deplaceExpert());
 
         // Déplacement des fauves
         faire_bouger_fauves();

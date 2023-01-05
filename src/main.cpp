@@ -13,7 +13,6 @@ int main() {
 //    t.sauvegarde();
 
 //    string str = fonctions::printAndSelectFile();
-//    terrain t2 = fonctions::lire_fichier("fini");
 //    t2.affiche();
     application app{};
     app.run();

@@ -21,6 +21,8 @@ private:
 
     terrain d_terrain_charge;
     partie d_partie;
+
+    void jouerExpert();
 };
 
 

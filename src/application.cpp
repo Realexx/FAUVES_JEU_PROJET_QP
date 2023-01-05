@@ -21,6 +21,7 @@ void application::run() {
             case 3 :cout<< "fonctionnalité indisponible..\n" ;break;
 //            case 3 : edition_terrain(); break;
             case 4 : choix_terrain(); break;
+            case 5 : jouerExpert(); break;
             default: goOn = false;
         }
     }
@@ -35,16 +36,21 @@ int application::menu_principal() {
         std::cout<<"(2) Creer un terrain"<<'\n';
         std::cout<<"(3) Editer un terrain"<<'\n';
         std::cout<<"(4) Choisir le terrain à charger"<<'\n';
-        std::cout<<"(5) Quitter"<<std::endl;
+        std::cout<<"(5) Jouer en mode expert3"<<'\n';
+        std::cout<<"(6) Quitter"<<std::endl;
         std::cin>>choice;
     }
-    while (choice<1 || choice>5);
+    while (choice<1 || choice>6);
 
     return choice;
 }
 
 void application::jouer() {
     d_partie.run();
+    // d_partie.reinitialisation();
+}
+void application::jouerExpert() {
+    d_partie.runExpert();
     // d_partie.reinitialisation();
 }
 
