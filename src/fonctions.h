@@ -120,7 +120,7 @@ public:
     static string printAndSelectFile(){
         vector<string> files  = get_files();
         if (files.empty()) {
-            std::cout << "Pas de fichier dans le répertoire." << std::endl;
+            std::cout << "Pas de fichier dans le repertoire." << std::endl;
             return "";
         }
         std::cout << "Choisir un fichier:" << std::endl;

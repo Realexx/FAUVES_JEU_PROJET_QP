@@ -162,7 +162,7 @@ void terrain::creer_Terrain() {
     }
 
     // Ajout de pièges sur le terrain
-    reponse = fonctions::demande_oui_non("Voulez-vous ajouter des pieges sur le terrain ? (o/n) ");
+    reponse = fonctions::demande_oui_non("Voulez-vous ajouter un piege sur le terrain ? (o/n) ");
     while (reponse == 'o') {
         int lignePiege = fonctions::demande_entier("Entrez la ligne du piege : ");
         int colonnePiege = fonctions::demande_entier("Entrez la colonne du piege : ");
