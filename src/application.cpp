@@ -3,6 +3,7 @@
 #include "tigre.h"
 #include "lion.h"
 #include "terrain.h"
+#include "fonctions.h"
 #include <iostream>
 
 application::application() : d_terrain_charge{9,9,position{0,0}}, d_partie{d_terrain_charge}
@@ -17,7 +18,8 @@ void application::run() {
         {
             case 1 : jouer(); break;
             case 2 : creation_terrain(); break;
-            case 3 : edition_terrain(); break;
+            case 3 :cout<< "fonctionnalité indisponible..\n" ;break;
+//            case 3 : edition_terrain(); break;
             case 4 : choix_terrain(); break;
             default: goOn = false;
         }
@@ -50,11 +52,8 @@ void application::creation_terrain() {
     terrain t1{1};
     t1.creer_Terrain();
     t1.sauvegarde();
-//    set_terrain_charge(t1);
-//    jouer();
-
-//    d_partie.set_terrain(t1);
-    // TODO Affiche un questionnaire permettant de généré un fichier texte contenant les informations d'un terrain
+    cout << "voici le terrain crée : \n";
+    t1.affiche();
 }
 
 void application::edition_terrain() {
@@ -66,14 +65,7 @@ void application::edition_terrain() {
 
 void application::choix_terrain() {
     std::cout << "Menu choix terrain\n";
-    // TODO Affiche la liste des fichiers/terrains + l'utilisateur sélectionne le fichier qu'il veut + conversion du fichier sélectionné en objet de type terrain
+    fonctions::printAndSelectFile();
+    //La selection se faitn mais bug quand on veut le jouer => pb surcharge d'opérateurs
     // puis insertion du terrain obtenu dans 'd_terrain_charge'
 }
-
-//void application::set_terrain_charge(terrain& t){
-//    d_terrain_charge.get_largeur() = t.set_largeur(d_terrain_charge.get_largeur());
-//    d_terrain_charge.d_hauteur = t.d_hauteur;
-//    d_terrain_charge.d_position_joueur = t.d_position_joueur;
-//    d_terrain_charge.d_fauves = std::move(t.d_fauves);
-//    d_terrain_charge.d_pieges = t.d_pieges;
-//}

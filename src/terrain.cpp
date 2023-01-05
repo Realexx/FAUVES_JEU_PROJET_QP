@@ -5,13 +5,12 @@
 #include "fonctions.h"
 #include <utility>
 #include <iostream>
-#include <fstream>
 #include <string>
 #include <vector>
 
 terrain::terrain() : d_largeur{10}, d_hauteur{10}, d_position_joueur{0, 0}, d_fauves{}, d_pieges{} {}
 
-terrain::terrain(int option) : d_largeur{}, d_hauteur{}, d_position_joueur{ }, d_fauves{}, d_pieges{} {}
+terrain::terrain(int vide) : d_largeur{}, d_hauteur{}, d_position_joueur{ }, d_fauves{}, d_pieges{} {}
 
 terrain::terrain(int largeur, int hauteur, position position_joueur)
         : d_largeur{largeur}, d_hauteur{hauteur}, d_position_joueur{position_joueur} {
@@ -21,10 +20,6 @@ terrain::terrain(int largeur, int hauteur, position position_joueur)
     ajoute_fauve(std::make_unique<lion>(position{8, 0}));
 }
 
-//terrain( terrain &t){
-//        : d_largeur{t.d_largeur}, d_hauteur{t.d_hauteur}, d_position_joueur{t.d_position_joueur},
-//          d_fauves{t.d_fauves}, d_pieges{t.d_pieges} {}
-//};
 int terrain::get_largeur() const {
     return d_largeur;
 }
@@ -110,16 +105,15 @@ void terrain::affiche() {
     std::cout << '\n';
 }
 
-
 void terrain::sauvegarde() {
     // Ouvre un flux de sortie vers le fichier
     string nom_fichier;
-    cout << "Comment voulez vous appeler le fichier ? ";
+    cout << "Comment voulez vous nommer le fichier ? ";
     cin >> nom_fichier;
-    ofstream fichier("C:\\Users\\rouam\\OneDrive\\Documents\\Cours\\ProjetL3\\FAUVES_JEU_PROJET_QP\\src\\"+nom_fichier);
+//    ofstream fichier("C:\\Users\\rouam\\OneDrive\\Documents\\Cours\\ProjetL31\\FAUVES_JEU_PROJET_QP\\src\\"+nom_fichier);
+    ofstream fichier("..\\src\\saves\\"+nom_fichier);
 
     // Écrit les informations sur le terrain dans le fichier à l'aide
-    cout<< get_largeur()<<"//"<< get_hauteur()<<"//" << d_position_joueur.get_ligne()<< endl;
     fichier << get_largeur() << " "<< get_hauteur() << '\n';
     fichier << get_joueur_ligne() << ' ' << get_joueur_colonne() << '\n';
     fichier << d_fauves.size() << '\n';
@@ -149,7 +143,6 @@ void terrain::creer_Terrain() {
     set_hauteur(hauteurTerrain);
     set_largeur(largeurTerrain);
 
-//    terrain t{largeurTerrain, hauteurTerrain, position_joueur};
 
     // Ajout de fauves sur le terrain
     char reponse =  fonctions::demande_oui_non("Voulez-vous ajouter des fauves sur le terrain ? (o/n) ");

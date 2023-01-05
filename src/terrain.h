@@ -11,7 +11,9 @@ public:
     terrain();
     terrain(int largeur, int hauteur, position position_joueur);
 
-    terrain(int larg);
+    terrain(int vide); // crée un constructeur par defaut
+
+    terrain(std::string defaul);
 
     int get_largeur() const;
     int get_hauteur() const;
@@ -27,6 +29,7 @@ public:
     void ajoute_fauve(std::unique_ptr<fauve> f);
     void affiche();
     void sauvegarde();
+    terrain chargeTerrain(const std::string &nom_fichier) const;
 
     void creer_Terrain();
 
